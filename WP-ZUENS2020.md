@@ -80,7 +80,7 @@
         <解析>&xxe;</解析>
     </阵枢>
     - 尝试使用 <阵枢> 作为根元素，<解析> 作为包含实体引用的子元素。-----AI
-
+新的 XXE Payload 如下：
 - 19 第十九章 星穹真相·补天归源 ✅
     - 观察页面发现题目是一段PHP代码
     - 发现核心漏洞：unserialize($_GET['person']) ----AI
@@ -100,5 +100,3 @@
 [chunk]:https://cdn.luogu.com.cn/upload/image_hosting/bw3glndu.png?x-oss-process=image/resize,m_lfit,h_170,w_225
 
 [Zlib]:https://cdn.luogu.com.cn/upload/image_hosting/s1by0js1.png
-
-
