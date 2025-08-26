@@ -70,6 +70,7 @@
 - 06 第六章 藏经禁地？玄机初探!
 - 07 第七章 灵媒妖穴与阴阳双生符
 - 08 第八章 天行真言，星图显圣
+<<<<<<< HEAD
 - 10 第十章 天机符阵 ✅
     - 输入内容发现报错信息特点，使用题目已知元素
     - <?xml version="1.0"?>
@@ -86,6 +87,8 @@
     - 发现核心漏洞：unserialize($_GET['person']) ----AI
     - 漏洞可以执行用户输入的内容
     - 在 PersonC::__Check() 方法中，绕过 flag 检查，并利用其中的 $name($age) 最终执行 system('cat /flag') ----AI
+=======
+>>>>>>> c5f8a642e9c68f2255c774ec6f65eefa59cee92a
 
 
 
@@ -99,4 +102,8 @@
 
 [chunk]:https://cdn.luogu.com.cn/upload/image_hosting/bw3glndu.png?x-oss-process=image/resize,m_lfit,h_170,w_225
 
+<<<<<<< HEAD
 [Zlib]:https://cdn.luogu.com.cn/upload/image_hosting/s1by0js1.png
+=======
+[Zlib]:https://cdn.luogu.com.cn/upload/image_hosting/s1by0js1.png
+>>>>>>> c5f8a642e9c68f2255c774ec6f65eefa59cee92a
