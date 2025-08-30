@@ -61,7 +61,17 @@
 
 ## Web安全与渗透测试
 - 0 Web入门指北 ✅
+    - 把附件中的代码复制到控制台中获得flag 
 - 01 第一章 神秘的手镯 ✅
+    - 查看页面源代码发现
+    ```
+    <script src="shouzhuo.js"></script>
+    ```
+    - 打开shouzhuo.js发现
+    ```
+    const CORRECT_PASSWORD = "VkUpRXYLbkpqYZQtZBOpaIRmsCblcV......
+    ```
+    - 
 - 02 第二章 初识金曜玄轨 ✅
 - 03 第三章 向剑石！算天攻击! ✅
 - 05 第五章 打上门来! ✅
