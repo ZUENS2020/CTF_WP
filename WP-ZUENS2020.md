@@ -69,12 +69,67 @@
     ```
     - 打开shouzhuo.js发现
     ```
-    const CORRECT_PASSWORD = "VkUpRXYLbkpqYZQtZBOpaIRmsCblcV......
+    <div class="flag">moectf{f_i2_1s_Your_g00d_fri3nd!!}</div>
     ```
-    - 
+    - 得到flag
 - 02 第二章 初识金曜玄轨 ✅
+    - 通过Wireshark分析
+    - 在对/golden_trail的http包进行分析后发现
+    ```
+    /golden_trail/flag
+    ```
+    - 得到flag
 - 03 第三章 向剑石！算天攻击! ✅
+    - 使用burpsuit修改测试请求
+    ```
+    POST /test_talent?level=S HTTP/1.1
+    Host: 127.0.0.1:11055
+    Content-Length: 24
+    Content-Type: application/json
+    Accept: */*
+    Accept-Encoding: gzip, deflate, br
+    Accept-Language: zh-CN,zh;q=0.9
+    Connection: keep-alive
+    Origin: http://127.0.0.1:11055
+    Referer: http://127.0.0.1:11055/
+    Sec-Ch-Ua: "Chromium";v="139", "Not;A=Brand";v="99"
+    Sec-Ch-Ua-Mobile: ?0
+    Sec-Fetch-Dest: empty
+    Sec-Fetch-Mode: cors
+    Sec-Fetch-Site: same-origin
+    Sec-Ch-Ua-Platform: "Windows"
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+
+    {"manifestation":"flowing_azure_clouds"}
+    ```
+    - 得到flag
 - 05 第五章 打上门来! ✅
+    - （本题有后面题目的提示）
+    - 使用../访问文件目录    ------询问AI
+    - 阅读index.php了解逻辑
+    ```
+    <!-- 上级目录链接 -->
+    <?php if ($target !== './' && $target !== '/' && $target !== ''): ?>
+        <tr>
+            <td class="folder-cell" onclick="navigateTo(
+                '<?php echo dirname($target) === '.' ? './' : dirname($target); ?>'
+            )">
+                <i class="fas fa-level-up-alt"></i> ..
+            </td>
+            <td>上级信标库</td>
+        </tr>
+    <?php endif; ?>
+
+    <!-- 实际文件系统中的内容 -->
+    <?php
+    $entries = scandir($now_target);
+    foreach ($entries as $entry):
+        if ($entry === '.' || $entry === '..') continue;
+        $fullPath = rtrim($target, '/') . '/' . $entry;
+        $judgePath = rtrim($now_target, '/') . '/' . $entry;
+        if (is_dir($judgePath)):
+    ```
+    - 尝试使用../../进入根目录，得到flag
 - Moe笑传之猜猜爆 ✅
 - 04 第四章 金曜极禁与七绝伶俐阵
 - 06 第六章 藏经禁地？玄机初探!
