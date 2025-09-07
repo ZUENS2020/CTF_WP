@@ -200,7 +200,7 @@
 - 14 第十四章 御神关·补天玉碑 ✅
   - 访问页面发现要上传文件
   - 根据经验判断要使用php文件运行命令
-  - 通过上传.htaccess配置系统将jpg作为php运行
+  - 通过上传.htaccess配置系统将jpg作为php运行------AI
   ```
   AddType application/x-httpd-php .jpg
   ```
