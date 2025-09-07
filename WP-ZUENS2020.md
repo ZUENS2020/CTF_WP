@@ -239,6 +239,19 @@
     ```
   - 使用php运行得到url
   - 得到flag
+- 18 第十八章 万卷诡阁·功法连环 ✅
+  - 观察页面发现是php对象注入
+  - 构造查看env的payload（**一定注意PersonA的name是私有的**------AI）
+  - payload关键点：
+  ```
+  // 使用反射 (Reflection) API 来强制给私有属性 $name 赋值
+  $reflection = new ReflectionClass('PersonA');
+  $property = $reflection->getProperty('name');
+  $property->setAccessible(true); // 解除私有属性的访问限制
+  $property->setValue($person_a, $person_b); // 将 PersonA 实例的 name 属性设置为我们创建的 PersonB 实例
+  ```
+  - 使用php将payload序列化并进行url编码
+  - 访问包含payload的url并成功得到flag
 - 19 第十九章 星穹真相·补天归源 ✅
 
   - 观察页面发现题目是一段PHP代码
