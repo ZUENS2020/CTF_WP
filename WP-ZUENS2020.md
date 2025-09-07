@@ -180,9 +180,9 @@
 - 这是一个...Webshell!? ✅
 
   - 观察到 `eval($_GET['shell'])` 存在任意代码执行漏洞，但通过 `!preg_match('/[A-Za-z0-9]/is', $_GET['shell'])` 过滤了字母和数字。
-  - 解题思路：利用PHP的按位取反运算符 `~` 等非字母数字字符构造所需的函数名（如 `system`）和参数（ 根据做题经验一般为env）。
-  - 注意事项：由于 `eval()` 语法限制，不能直接使用表达式作为函数名进行调用，需要通过变量（如 `$_`）进行赋值后再调用。-------AI
-  - 得到flag：通过构造Payload执行 `system('cat /flag')` 等命令获取。
+  - 利用PHP的按位取反运算符 `~` 等非字母数字字符构造所需的函数名（比如如 `system`）和参数（根据做题经验一般为env）。
+  - 由于 `eval()` 语法限制，不能直接使用表达式作为函数名进行调用，需要通过变量（如 `$_`）进行赋值后再调用。-------AI
+  - 通过构造Payload执行 system("env") 命令获取。
 - 10 第十章 天机符阵 ✅
 
   - 输入内容发现报错信息特点，使用题目已知元素
@@ -190,7 +190,7 @@
   ```xml
   <?xml version="1.0"?>
   <!DOCTYPE 阵枢 [
-      <!ENTITY xxe SYSTEM "file:///var/www/html/flag.txt">
+      <!ENTITY xxe SYSTEM "file:///var/www/html/flag.txt">T
   ]>
   <阵枢>
       <解析>&xxe;</解析>
