@@ -33,6 +33,11 @@
     ![chunk][chunk]
   - 解码899 007部分 -AI
     ![Zlib][Zlib]
+- WebRepo ✅
+  - 使用zsteg分割图片隐写得到hidden
+  - 发现是个空的git仓库
+  - 通过git log发现提交记录
+  - 通过git show发现flag3
 
 ## 从此开始
 
