@@ -4,6 +4,9 @@
 
 - Misc入门指北 ✅
   - 附件PDF中的隐藏字段
+- Rush ✅
+  - 分离gif帧，发现QR码
+  - 使用QR-Reader读取QR码，得到flag
 - ez_LSB ✅
   - 使用StegSolve
     ![StegSolve][StegSolve]
