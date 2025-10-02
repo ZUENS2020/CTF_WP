@@ -19,7 +19,7 @@
   - 使用jhon2pdf获得hash
   - 使用hashcat成功爆破
 - 哈基米难没露躲 ✅
-  - 使用[https://github.com/ZUENS2020/Hex_CTF](https://github.com/ZUENS2020/Hex_CTF)（推销一下我写的工具）发现zip中隐藏有url
+  - 使用[https://github.com/ZUENS2020/Hex_CTF](https://github.com/ZUENS2020/Hex_CTF)发现zip中隐藏有url
   - 访问url并输入txt内容发现fakeflag
   - 询问AI发现有隐藏字符，使用工具成功得到flag
 - SSTV ✅
