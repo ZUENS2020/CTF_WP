@@ -1,0 +1,8 @@
+serverAddr = "103.224.82.164"
+serverPort = 7000
+
+[[proxies]]
+name = "socks5_pivot" 
+type = "tcp"        
+remotePort = 1080     
+plugin = "socks5"     
