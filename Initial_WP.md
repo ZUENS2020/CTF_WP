@@ -54,7 +54,7 @@
 - **步骤 5：通过 crackmapexec 使用 hash 执行命令 / 登录**  
     截图：![hash 复用执行](./过程截图/vmware_jjpEavkzLv.png)
 
-- **步骤 6：在文件中找到 flag**（原始记录未写明路径与内容）
+- **步骤 6：在文件中找到 flag**
 
 ---
 
